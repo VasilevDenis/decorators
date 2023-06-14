@@ -1,17 +1,11 @@
 import os
 import time
-
-'''Доработать параметризованный декоратор logger в коде ниже.
- Должен получиться декоратор, который записывает в файл дату и время вызова функции,
-  имя функции, аргументы, с которыми вызвалась, и возвращаемое значение.
-   Путь к файлу должен передаваться в аргументах декоратора.
- Функция test_2 в коде ниже также должна отработать без ошибок.'''
+from functools import wraps
 
 
 def logger(path):
-    ...
-
     def __logger(old_function):
+        @wraps(old_function)
         def new_function(*args, **kwargs):
             result = old_function(*args, **kwargs)
             with open(path, 'a+') as log_file:
